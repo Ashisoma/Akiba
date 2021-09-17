@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ashisoma</groupId>
-	<artifactId>Akiba</artifactId>
+	<artifactId>akiba</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Akiba</name>
 	<description>A bank backend </description>
@@ -31,6 +31,7 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
