@@ -1,9 +1,30 @@
 package com.ashisoma.akiba.account;
 
+import javax.persistence.*;
+
+@Table(name = "account")
+@Entity(name = "account")
 public class Account {
-    Long account_number;
-    Float balance;
-    String branch;
+
+    @SequenceGenerator(
+            name = "account_sequence",
+            sequenceName = "account_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "account_sequence"
+    )
+
+    @Id
+    @Column(nullable = false, unique = true)
+    private Long account_number;
+
+    @Column(nullable = false)
+    private Float balance;
+
+    @Column(nullable = false)
+    private String branch;
 
     public Account() {
     }

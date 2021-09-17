@@ -3,7 +3,7 @@ package com.ashisoma.akiba.customer;
 import javax.persistence.*;
 
 @Table(name = "Customer")
-@Entity
+@Entity(name = "customer")
 public class Customer {
 
     @SequenceGenerator(
