@@ -36,6 +36,7 @@ public class Customer {
     public Customer() {
     }
 
+
     public Customer(Long customer_id, String first_name, String second_name, String city, String street) {
         this.account_number = customer_id;
         this.first_name = first_name;
