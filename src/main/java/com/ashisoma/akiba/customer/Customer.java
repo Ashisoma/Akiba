@@ -19,33 +19,28 @@ public class Customer {
     @Column(length = 16, name = "account_number", nullable = false, unique = true, updatable = false)
     private Long account_number;
 
+    @Column(nullable = false, length = 8, unique = true)
+    private Integer nationalId;
+
     @Column(name = "first_name", nullable = false)
     private String first_name;
 
-    @Column( name = "second_name", nullable = false)
+    @Column(name = "second_name", nullable = false)
     private String second_name;
 
-    @Column( name = "city", nullable = false)
+    @Column(name = "city", nullable = false)
     private String city;
 
-    @Column( name = "street")
+    @Column(name = "street")
     private String street;
-
 
 
     public Customer() {
     }
 
-
-    public Customer(Long customer_id, String first_name, String second_name, String city, String street) {
-        this.account_number = customer_id;
-        this.first_name = first_name;
-        this.second_name = second_name;
-        this.city = city;
-        this.street = street;
-    }
-
-    public Customer(String first_name, String second_name, String city, String street) {
+    public Customer(Long account_number, Integer nationalId, String first_name, String second_name, String city, String street) {
+        this.account_number = account_number;
+        this.nationalId = nationalId;
         this.first_name = first_name;
         this.second_name = second_name;
         this.city = city;
@@ -55,7 +50,8 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "customer_id=" + account_number +
+                "account_number=" + account_number +
+                ", nationalId=" + nationalId +
                 ", first_name='" + first_name + '\'' +
                 ", second_name='" + second_name + '\'' +
                 ", city='" + city + '\'' +
@@ -69,6 +65,14 @@ public class Customer {
 
     public void setAccount_number(Long account_number) {
         this.account_number = account_number;
+    }
+
+    public Integer getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(Integer nationalId) {
+        this.nationalId = nationalId;
     }
 
     public String getFirst_name() {
