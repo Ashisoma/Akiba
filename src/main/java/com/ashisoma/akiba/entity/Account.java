@@ -1,4 +1,4 @@
-package com.ashisoma.akiba.account;
+package com.ashisoma.akiba.entity;
 
 import javax.persistence.*;
 

@@ -1,5 +1,6 @@
-package com.ashisoma.akiba.account;
+package com.ashisoma.akiba.repository;
 
+import com.ashisoma.akiba.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {

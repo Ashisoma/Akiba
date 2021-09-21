@@ -1,5 +1,7 @@
-package com.ashisoma.akiba.customer;
+package com.ashisoma.akiba.services;
 
+import com.ashisoma.akiba.repository.CustomerRepository;
+import com.ashisoma.akiba.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,6 +64,14 @@ public class CustomerService {
         if (s_name != null && s_name.length()>0 && !Objects.equals(customer.getSecond_name(),s_name))
         {
             customer.setSecond_name(s_name);
+        }
+        if (city != null && city.length()>0 && !Objects.equals(customer.getCity(),city))
+        {
+            customer.setCity(city);
+        }
+        if (street != null && street.length()>0 && !Objects.equals(customer.getStreet(),street))
+        {
+            customer.setStreet(street);
         }
     }
 
