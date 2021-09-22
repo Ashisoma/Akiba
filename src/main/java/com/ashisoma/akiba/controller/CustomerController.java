@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/v1/akiba")
+@RequestMapping(path = "api/v1/akiba/customers")
 public class CustomerController {
 
     @Autowired
@@ -23,9 +24,14 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @RequestMapping("/Customers")
+    @RequestMapping
     public List<Customer> findAllCustomers(){
         return customerService.getAllCustomers();
+    }
+
+    @RequestMapping("search/byNationalId/{nationalId}")
+    public Optional<Customer> findByNationalId(@PathVariable(value = "nationalId") int nationalId){
+        return customerService.findByNationalId(nationalId);
     }
 
     @RequestMapping("/search/byFirstName/{firstName}")

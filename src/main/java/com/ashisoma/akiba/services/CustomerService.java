@@ -82,4 +82,8 @@ public class CustomerService {
     public List<Customer> findCustomerBySecondName(String secondName) {
         return customerRepository.findCustomerBySecondNameIgnoreCase(secondName);
     }
+
+    public Optional<Customer> findByNationalId(Integer nationalId) {
+        return customerRepository.findCustomerByNationalId(nationalId);
+    }
 }
