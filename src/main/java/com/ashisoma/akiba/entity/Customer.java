@@ -23,10 +23,10 @@ public class Customer {
     private Integer nationalId;
 
     @Column(name = "first_name", nullable = false)
-    private String first_name;
+    private String firstName;
 
     @Column(name = "second_name", nullable = false)
-    private String second_name;
+    private String secondName;
 
     @Column(name = "city", nullable = false)
     private String city;
@@ -41,8 +41,8 @@ public class Customer {
     public Customer(Long account_number, Integer nationalId, String first_name, String second_name, String city, String street) {
         this.account_number = account_number;
         this.nationalId = nationalId;
-        this.first_name = first_name;
-        this.second_name = second_name;
+        this.firstName = first_name;
+        this.secondName = second_name;
         this.city = city;
         this.street = street;
     }
@@ -52,8 +52,8 @@ public class Customer {
         return "Customer{" +
                 "account_number=" + account_number +
                 ", nationalId=" + nationalId +
-                ", first_name='" + first_name + '\'' +
-                ", second_name='" + second_name + '\'' +
+                ", first_name='" + firstName + '\'' +
+                ", second_name='" + secondName + '\'' +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 '}';
@@ -75,20 +75,20 @@ public class Customer {
         this.nationalId = nationalId;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSecond_name() {
-        return second_name;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setSecond_name(String second_name) {
-        this.second_name = second_name;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public String getCity() {

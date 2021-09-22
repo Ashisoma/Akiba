@@ -56,14 +56,14 @@ public class CustomerService {
     public void updateCustomer(Long accountNUmber, String f_name, String s_name, Integer nationalId, String city, String street){
         Customer customer = customerRepository.findCustomerByNationalId(nationalId).orElseThrow(()->
                 new IllegalStateException("Customer with "+ nationalId+" does not exist"));
-        if (f_name != null && f_name.length()>0 && !Objects.equals(customer.getFirst_name(),f_name))
+        if (f_name != null && f_name.length()>0 && !Objects.equals(customer.getFirstName(),f_name))
         {
-            customer.setFirst_name(f_name);
+            customer.setFirstName(f_name);
         }
 
-        if (s_name != null && s_name.length()>0 && !Objects.equals(customer.getSecond_name(),s_name))
+        if (s_name != null && s_name.length()>0 && !Objects.equals(customer.getSecondName(),s_name))
         {
-            customer.setSecond_name(s_name);
+            customer.setSecondName(s_name);
         }
         if (city != null && city.length()>0 && !Objects.equals(customer.getCity(),city))
         {
@@ -75,4 +75,11 @@ public class CustomerService {
         }
     }
 
+    public List<Customer> findCustomerByFirstName(String firstName) {
+        return customerRepository.findCustomerByFirstNameIgnoreCase(firstName);
+    }
+
+    public List<Customer> findCustomerBySecondName(String secondName) {
+        return customerRepository.findCustomerBySecondNameIgnoreCase(secondName);
+    }
 }
