@@ -16,8 +16,11 @@ public class Customer {
             generator = "customer_sequence"
     )
     @Id
-    @Column(length = 16, name = "account_number", nullable = false, unique = true, updatable = false)
-    private Long account_number;
+    @Column(name = "id", nullable = false, unique = true, updatable = false)
+    private Long id;
+
+    @Column(length = 16, name = "account_number", nullable = false, unique = true)
+    private Integer account_number;
 
     @Column(nullable = false, length = 8, unique = true)
     private Integer nationalId;
@@ -38,7 +41,17 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Long account_number, Integer nationalId, String first_name, String second_name, String city, String street) {
+    public Customer(Long id, Integer account_number, Integer nationalId, String firstName, String secondName, String city, String street) {
+        this.id = id;
+        this.account_number = account_number;
+        this.nationalId = nationalId;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.city = city;
+        this.street = street;
+    }
+
+    public Customer(Integer account_number, Integer nationalId, String first_name, String second_name, String city, String street) {
         this.account_number = account_number;
         this.nationalId = nationalId;
         this.firstName = first_name;
@@ -50,6 +63,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
+                "id"+ id +
                 "account_number=" + account_number +
                 ", nationalId=" + nationalId +
                 ", first_name='" + firstName + '\'' +
@@ -59,11 +73,11 @@ public class Customer {
                 '}';
     }
 
-    public Long getAccount_number() {
+    public Integer getAccount_number() {
         return account_number;
     }
 
-    public void setAccount_number(Long account_number) {
+    public void setAccount_number(Integer account_number) {
         this.account_number = account_number;
     }
 

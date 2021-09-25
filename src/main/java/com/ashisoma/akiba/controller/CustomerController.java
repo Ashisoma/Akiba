@@ -4,9 +4,7 @@ import com.ashisoma.akiba.entity.Customer;
 import com.ashisoma.akiba.repository.CustomerRepository;
 import com.ashisoma.akiba.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +13,7 @@ import java.util.Optional;
 @RequestMapping(path = "api/v1/akiba/customers")
 public class CustomerController {
 
+    // todo : test all the endpoints using the postman app
     @Autowired
     CustomerRepository customerRepository;
 
@@ -24,34 +23,30 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @RequestMapping
+    // GET METHODS
+    @GetMapping
     public List<Customer> findAllCustomers(){
         return customerService.getAllCustomers();
     }
 
-    @RequestMapping("search/byNationalId/{nationalId}")
+    @GetMapping("search/byNationalId/{nationalId}")
     public Optional<Customer> findByNationalId(@PathVariable(value = "nationalId") int nationalId){
         return customerService.findByNationalId(nationalId);
     }
 
-    @RequestMapping("/search/byFirstName/{firstName}")
+    @GetMapping("/search/byFirstName/{firstName}")
     public List<Customer> findByFirstName(@PathVariable(value = "firstName") String firstName){
         return customerService.findCustomerByFirstName(firstName);
     }
 
-    @RequestMapping("/search/bySecondName/{secondName}")
+    @GetMapping("/search/bySecondName/{secondName}")
     public List<Customer> findBySecondName(@PathVariable(value = "secondName") String secondName){
         return customerService.findCustomerBySecondName(secondName);
     }
 
-    //    @RequestMapping(value = "/customer", method = RequestMethod.POST)
-//    public Customer saveCustomer(Customer customer){
-//        return customerRepository.save(customer);
-//    }
-//
-//    @RequestMapping(value = "/customer/{nationalId}", method = RequestMethod.GET)
-//    public void findCustomerById(@PathVariable int nationalId){
-//        Optional<Customer> s_customer = customerRepository.findCustomerByNationalId(nationalId);
-//
-//    }
+    @PostMapping(value = "/save")
+    public Customer saveCustomer(@RequestBody Customer customer){
+        return customerRepository.save(customer);
+    }
+
 }
