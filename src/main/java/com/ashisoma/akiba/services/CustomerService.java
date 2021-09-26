@@ -53,12 +53,17 @@ public class CustomerService {
 
     // todo finish on doing an update
     @Transactional
-    public void updateCustomer(Long accountNUmber, String f_name, String s_name, Integer nationalId, String city, String street){
+    public void updateCustomer(Long custId,Integer accountNumber, String f_name, String s_name, Integer nationalId, String city, String street){
         Customer customer = customerRepository.findCustomerByNationalId(nationalId).orElseThrow(()->
-                new IllegalStateException("Customer with "+ nationalId+" does not exist"));
+                new IllegalStateException("Customer with id: "+custId+" does not exist"));
         if (f_name != null && f_name.length()>0 && !Objects.equals(customer.getFirstName(),f_name))
         {
             customer.setFirstName(f_name);
+        }
+
+        if (accountNumber != null && accountNumber>0 && !Objects.equals(customer.getAccount_number(),accountNumber))
+        {
+            customer.setAccount_number(accountNumber);
         }
 
         if (s_name != null && s_name.length()>0 && !Objects.equals(customer.getSecondName(),s_name))
@@ -86,4 +91,14 @@ public class CustomerService {
     public Optional<Customer> findByNationalId(Integer nationalId) {
         return customerRepository.findCustomerByNationalId(nationalId);
     }
+
+    // DELETE
+    public void deleteCustomerById(Long customerId){
+        boolean admin_exists = customerRepository.existsById(customerId);
+        if(!admin_exists){
+            throw new IllegalStateException("Admin with id "+ customerId + " does not exist");
+        }
+        customerRepository.deleteById(customerId);
+    }
+
 }

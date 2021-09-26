@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Table(name = "account")
 @Entity(name = "account")
-public class Account {
+public class Account extends Customer{
 
     @SequenceGenerator(
             name = "account_sequence",
@@ -18,7 +18,8 @@ public class Account {
 
     @Id
     @Column(nullable = false, unique = true)
-    private Long account_number;
+    private Long id;
+
 
     @Column(nullable = false)
     private Float balance;
@@ -29,27 +30,24 @@ public class Account {
     public Account() {
     }
 
-    public Account(Long account_number, Float balance, String branch) {
-        this.account_number = account_number;
+    public Account(Long id, Float balance, String branch) {
+        this.id = id;
         this.balance = balance;
         this.branch = branch;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "account_number=" + account_number +
-                ", balance=" + balance +
-                ", branch='" + branch + '\'' +
-                '}';
+    public Account(Long id, Integer account_number, Integer nationalId, String firstName, String secondName, String city, String street, Float balance, String branch) {
+        super(id, account_number, nationalId, firstName, secondName, city, street);
+        this.balance = balance;
+        this.branch = branch;
     }
 
-    public Long getAccount_number() {
-        return account_number;
+    public Long getId() {
+        return id;
     }
 
-    public void setAccount_number(Long account_number) {
-        this.account_number = account_number;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Float getBalance() {

@@ -15,8 +15,6 @@ public class CustomerController {
 
     // todo : test all the endpoints using the postman app
     @Autowired
-    CustomerRepository customerRepository;
-
     CustomerService customerService;
 
     public CustomerController(CustomerService customerService) {
@@ -44,9 +42,30 @@ public class CustomerController {
         return customerService.findCustomerBySecondName(secondName);
     }
 
+    // POST METHODS
     @PostMapping(value = "/save")
-    public Customer saveCustomer(@RequestBody Customer customer){
-        return customerRepository.save(customer);
+    public void saveCustomer(@RequestBody Customer customer){
+         customerService.addNewCustomer(customer);
+    }
+
+    // UPDATE METHODS
+
+    @PutMapping(path = "/updateCustomer/{customerId}")
+    public void updateCustomer(@PathVariable(value = "customerId")
+                               @RequestParam(required = false) Long customerId,
+                               @RequestParam(required = false) Integer accountNumber,
+                               @RequestParam(required = false) String f_name,
+                               @RequestParam(required = false) String s_name,
+                               @RequestParam(required = false) Integer nationalId,
+                               @RequestParam(required = false) String city,
+                               @RequestParam(required = false) String street){
+        customerService.updateCustomer(customerId, accountNumber,f_name,s_name,nationalId,city,street);
+    }
+
+    // DELETE METHODS
+    @DeleteMapping(path = "/delete/{customerId}")
+    public void deleteCustomerById(@PathVariable(value = "customerId") Long customerId){
+        customerService.deleteCustomerById(customerId);
     }
 
 }
