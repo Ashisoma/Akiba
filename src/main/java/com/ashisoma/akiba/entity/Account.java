@@ -1,10 +1,14 @@
 package com.ashisoma.akiba.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Table(name = "account")
 @Entity(name = "account")
-public class Account extends Customer{
+public class Account {
 
     @SequenceGenerator(
             name = "account_sequence",
@@ -20,12 +24,17 @@ public class Account extends Customer{
     @Column(nullable = false, unique = true)
     private Long id;
 
-
     @Column(nullable = false)
     private Float balance;
 
     @Column(nullable = false)
     private String branch;
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "customer_id",
+            referencedColumnName = "id")
+    private Customer customer;
 
     public Account() {
     }
@@ -36,10 +45,17 @@ public class Account extends Customer{
         this.branch = branch;
     }
 
-    public Account(Long id, Integer account_number, Integer nationalId, String firstName, String secondName, String city, String street, Float balance, String branch) {
-        super(id, account_number, nationalId, firstName, secondName, city, street);
+    public Account(Float balance, String branch) {
         this.balance = balance;
         this.branch = branch;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Long getId() {

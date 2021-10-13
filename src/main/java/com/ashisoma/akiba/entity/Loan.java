@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Entity
 public class Loan {
 
+    // TODO: 13/10/2021 loan  to payment (loan_payment)
     @SequenceGenerator(
             name = "loan_sequence",
             sequenceName = "loan_sequence",
@@ -20,9 +21,6 @@ public class Loan {
     @Column(nullable = false, updatable = false, unique = true)
     private Long loan_number;
 
-    @Column(nullable = false, unique = true)
-    private Long account_number;
-
     @Column
     private Float loan_balance;
 
@@ -32,9 +30,8 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(Long loan_number, Long account_number, Float loan_balance, String branch) {
+    public Loan(Long loan_number,Float loan_balance, String branch) {
         this.loan_number = loan_number;
-        this.account_number = account_number;
         this.loan_balance = loan_balance;
         this.branch = branch;
     }
@@ -43,7 +40,6 @@ public class Loan {
     public String toString() {
         return "Loan{" +
                 "loan_number=" + loan_number +
-                ", account_number=" + account_number +
                 ", loan_balance=" + loan_balance +
                 ", branch='" + branch + '\'' +
                 '}';
@@ -57,13 +53,7 @@ public class Loan {
         this.loan_number = loan_number;
     }
 
-    public Long getAccount_number() {
-        return account_number;
-    }
 
-    public void setAccount_number(Long account_number) {
-        this.account_number = account_number;
-    }
 
     public Float getLoan_balance() {
         return loan_balance;

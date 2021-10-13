@@ -1,11 +1,14 @@
 package com.ashisoma.akiba.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Table(name = "Customer")
 @Entity(name = "customer")
 public class Customer {
 
+    // todo customer to borrower
     @SequenceGenerator(
             name = "customer_sequence",
             sequenceName = "customer_sequence",
@@ -18,9 +21,6 @@ public class Customer {
     @Id
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private Long id;
-
-    @Column(length = 16, name = "account_number", nullable = false, unique = true)
-    private Integer account_number;
 
     @Column(nullable = false, length = 8, unique = true)
     private Integer nationalId;
@@ -37,13 +37,17 @@ public class Customer {
     @Column(name = "street")
     private String street;
 
+    @OneToOne
+    @JoinColumn(name = "account_id",
+    referencedColumnName = "id")
+    private Account account;
 
     public Customer() {
     }
 
-    public Customer(Long id, Integer account_number, Integer nationalId, String firstName, String secondName, String city, String street) {
+    public Customer(Long id, Integer nationalId, String firstName, String secondName, String city, String street) {
         this.id = id;
-        this.account_number = account_number;
+
         this.nationalId = nationalId;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -51,8 +55,7 @@ public class Customer {
         this.street = street;
     }
 
-    public Customer(Integer account_number, Integer nationalId, String first_name, String second_name, String city, String street) {
-        this.account_number = account_number;
+    public Customer(Integer nationalId, String first_name, String second_name, String city, String street) {
         this.nationalId = nationalId;
         this.firstName = first_name;
         this.secondName = second_name;
@@ -64,21 +67,12 @@ public class Customer {
     public String toString() {
         return "Customer{" +
                 "id"+ id +
-                "account_number=" + account_number +
                 ", nationalId=" + nationalId +
                 ", first_name='" + firstName + '\'' +
                 ", second_name='" + secondName + '\'' +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 '}';
-    }
-
-    public Integer getAccount_number() {
-        return account_number;
-    }
-
-    public void setAccount_number(Integer account_number) {
-        this.account_number = account_number;
     }
 
     public Integer getNationalId() {
@@ -119,5 +113,21 @@ public class Customer {
 
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
