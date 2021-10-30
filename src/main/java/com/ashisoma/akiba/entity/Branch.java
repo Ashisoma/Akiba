@@ -13,7 +13,6 @@ public class Branch {
     private Long id;
     private String branch_name;
 
-
     public Long getId() {
         return id;
     }
