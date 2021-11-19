@@ -1,7 +1,11 @@
 package com.ashisoma.akiba.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Table(name = "Customer")
@@ -12,7 +16,7 @@ public class Customer {
     @SequenceGenerator(
             name = "customer_sequence",
             sequenceName = "customer_sequence",
-            allocationSize = 16
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -37,17 +41,25 @@ public class Customer {
     @Column(name = "street")
     private String street;
 
-    @OneToOne
-    @JoinColumn(name = "account_id",
-    referencedColumnName = "id")
-    private Account account;
+//    @OneToOne
+//    @JoinColumn(name = "account_id",
+//                referencedColumnName = "id")
+//    private Account account;
+//
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "customerPayment",
+//               orphanRemoval = true,
+//               cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+//               fetch = FetchType.LAZY
+//                )
+//    private List<Payments> payments = new ArrayList<>();
+//
 
     public Customer() {
     }
 
     public Customer(Long id, Integer nationalId, String firstName, String secondName, String city, String street) {
         this.id = id;
-
         this.nationalId = nationalId;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -74,6 +86,10 @@ public class Customer {
                 ", street='" + street + '\'' +
                 '}';
     }
+
+//    public List<Payments> getPayments() {
+//        return payments;
+//    }
 
     public Integer getNationalId() {
         return nationalId;
@@ -123,11 +139,11 @@ public class Customer {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
-    }
+//    public Account getAccount() {
+//        return account;
+//    }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
 }

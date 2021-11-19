@@ -24,16 +24,17 @@ public class Loan {
     @Column
     private Float loan_balance;
 
-    @Column(nullable = false)
-    private String branch;
+//    @ManyToOne(cascade = @JoinColumn(name = "branch_name"))
+//    private Branch branch;
+
 
     public Loan() {
     }
 
-    public Loan(Long loan_number,Float loan_balance, String branch) {
+    public Loan(Long loan_number, Float loan_balance) {
         this.loan_number = loan_number;
         this.loan_balance = loan_balance;
-        this.branch = branch;
+
     }
 
     @Override
@@ -41,7 +42,7 @@ public class Loan {
         return "Loan{" +
                 "loan_number=" + loan_number +
                 ", loan_balance=" + loan_balance +
-                ", branch='" + branch + '\'' +
+//                ", branch='" + branch + '\'' +
                 '}';
     }
 
@@ -54,7 +55,6 @@ public class Loan {
     }
 
 
-
     public Float getLoan_balance() {
         return loan_balance;
     }
@@ -63,11 +63,4 @@ public class Loan {
         this.loan_balance = loan_balance;
     }
 
-    public String getBranch() {
-        return branch;
-    }
-
-    public void setBranch(String branch) {
-        this.branch = branch;
-    }
 }

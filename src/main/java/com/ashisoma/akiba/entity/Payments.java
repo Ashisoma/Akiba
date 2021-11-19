@@ -2,7 +2,9 @@ package com.ashisoma.akiba.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Table(name = "payments")
@@ -22,21 +24,21 @@ public class Payments {
     private LocalDate payment_date;
 
     // TODO: 13/10/2021 to review this place again
-    @ManyToOne
-    @JoinTable(
-            name = "customer_payments",
-            joinColumns = @JoinColumn(name = "payment_id"),
-            inverseJoinColumns = @JoinColumn(name = "customer_id")
-    )
-    private Set<Customer> customerPayment = new HashSet<>();
+//    @ManyToOne
+//    @JoinTable(
+//            name = "customer_payments",
+//            joinColumns = @JoinColumn(name = "payment_id"),
+//            inverseJoinColumns = @JoinColumn(name = "customer_id")
+//    )
+//    private Customer customerPayment;
 
-    @ManyToOne
-    @JoinTable(
-            name = "loan_payments",
-            joinColumns = @JoinColumn(name = "payment_id"),
-            inverseJoinColumns = @JoinColumn(name = "loan_id")
-    )
-    private Set<Loan> loanPayment = new HashSet<>();
+//    @ManyToOne
+//    @JoinTable(
+//            name = "loan_payments",
+//            joinColumns = @JoinColumn(name = "payment_id"),
+//            inverseJoinColumns = @JoinColumn(name = "loan_id")
+//    )
+//    private List<Loan> loanPayment = new ArrayList<>();
     public Payments() {
     }
 

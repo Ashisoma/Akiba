@@ -53,13 +53,12 @@ public class CustomerController {
     @PutMapping(path = "/updateCustomer/{customerId}")
     public void updateCustomer(@PathVariable(value = "customerId")
                                @RequestParam(required = false) Long customerId,
-                               @RequestParam(required = false) Integer accountNumber,
+                               @RequestParam(required = false) Integer nationalId,
                                @RequestParam(required = false) String f_name,
                                @RequestParam(required = false) String s_name,
-                               @RequestParam(required = false) Integer nationalId,
                                @RequestParam(required = false) String city,
                                @RequestParam(required = false) String street){
-        customerService.updateCustomer(customerId, accountNumber,f_name,s_name,nationalId,city,street);
+        customerService.updateCustomer(customerId,nationalId,f_name,s_name,city,street);
     }
 
     // DELETE METHODS

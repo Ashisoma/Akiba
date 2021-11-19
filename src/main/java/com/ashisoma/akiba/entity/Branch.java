@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 
 @Table(name = "branch")
 @Entity
@@ -12,6 +13,8 @@ public class Branch {
     @Column(name = "id", nullable = false)
     private Long id;
     private String branch_name;
+
+//    private List<Loan>
 
     public Long getId() {
         return id;

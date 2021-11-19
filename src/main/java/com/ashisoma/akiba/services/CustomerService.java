@@ -31,12 +31,12 @@ public class CustomerService {
     public void addNewCustomer(Customer customer){
         // add exception and error handling
 
-        Optional<Customer> customerById = customerRepository.
-                findCustomerByNationalId(customer.getNationalId());
-
-        if(customerById.isPresent()){
-            throw new IllegalStateException("The national ID number is already in use.");
-        }
+//        Optional<Customer> customerById = customerRepository.
+//                findCustomerByNationalId(customer.getNationalId());
+//
+//        if(customerById.isPresent()){
+//            throw new IllegalStateException("The national ID number is already in use.");
+//        }
         customerRepository.save(customer);
     }
 
@@ -53,18 +53,18 @@ public class CustomerService {
 
     // todo finish on doing an update
     @Transactional
-    public void updateCustomer(Long custId,Integer accountNumber, String f_name, String s_name, Integer nationalId, String city, String street){
+    public void updateCustomer(Long custId,  Integer nationalId,String f_name, String s_name, String city, String street){
         Customer customer = customerRepository.findCustomerByNationalId(nationalId).orElseThrow(()->
                 new IllegalStateException("Customer with id: "+custId+" does not exist"));
         if (f_name != null && f_name.length()>0 && !Objects.equals(customer.getFirstName(),f_name))
         {
             customer.setFirstName(f_name);
         }
-
-        if (accountNumber != null && accountNumber>0 && !Objects.equals(customer.getAccount_number(),accountNumber))
-        {
-            customer.setAccount_number(accountNumber);
-        }
+//
+//        if (accountNumber != null && accountNumber>0 && !Objects.equals(customer.getAccount_number(),accountNumber))
+//        {
+//            customer.setAccount_number(accountNumber);
+//        }
 
         if (s_name != null && s_name.length()>0 && !Objects.equals(customer.getSecondName(),s_name))
         {
