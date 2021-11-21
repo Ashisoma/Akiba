@@ -30,25 +30,24 @@ public class CustomerService {
     //add new customer
     public void addNewCustomer(Customer customer){
         // add exception and error handling
+        Optional<Customer> customerById = customerRepository.
+                findCustomerByNationalId(customer.getNationalId());
 
-//        Optional<Customer> customerById = customerRepository.
-//                findCustomerByNationalId(customer.getNationalId());
-//
-//        if(customerById.isPresent()){
-//            throw new IllegalStateException("The national ID number is already in use.");
-//        }
+        if(customerById.isPresent()){
+            throw new IllegalStateException("The national ID number is already in use.");
+        }
         customerRepository.save(customer);
     }
 
     //delete a customer
-    public void deleteStudent(Long accountNum) {
+    public void deleteStudent(Long studentId) {
 //        todo impliment cascading when a user is deleted
         // use custom query to do a cascading
-        boolean exists = customerRepository.existsById(accountNum);
+        boolean exists = customerRepository.existsById(studentId);
         if (!exists){
-            throw new IllegalStateException("Student id: " + accountNum + "does not exist!");
+            throw new IllegalStateException("Student id: " + studentId + "does not exist!");
         }
-        customerRepository.deleteById(accountNum);
+        customerRepository.deleteById(studentId);
     }
 
     // todo finish on doing an update
