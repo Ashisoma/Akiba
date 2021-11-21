@@ -42,6 +42,7 @@ public class AccountController {
     }
 
     //delete method
+    @DeleteMapping(path = "delete/{id}")
     public  void deleteAnAccountById(Long id){
         service.deleteAccountById(id);
     }
