@@ -1,7 +1,6 @@
 package com.ashisoma.akiba.services;
 
 import com.ashisoma.akiba.entity.Account;
-import com.ashisoma.akiba.entity.Customer;
 import com.ashisoma.akiba.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,14 +26,14 @@ public class AccountService {
     }
 
     // GETTING AN ACCOUNT BY ID
-    public Account getByID(Long id){
-        return  repository.getById(id);
+    public Optional<Account> getByID(Long id){
+        return  repository.findById(id);
     }
 
     // ADD AN ACCOUNT
     // TODO: 21/11/2021  RELATIONSHIP IS RQ TO CREATE A NEW ACCOUNT
     public  void addNewAccount(Account account){
-        Optional<Account> account1 = repository.findById(account.getId());
+        Optional<Account> account1 = repository.findByAccountNumber(account.getAccountNumber());
         if(account1.isPresent()) {
             throw new IllegalStateException("The account exists");
         } else {
@@ -48,8 +47,8 @@ public class AccountService {
     public void updateAccount(Long Id, String branch, Float balance) {
         Account account = repository.findById(Id).orElseThrow(() ->
                 new IllegalStateException("Customer with id: " + Id + " does not exist"));
-        if (branch != null && branch.length() > 0 && !Objects.equals(account.getBranch(), branch)) {
-            account.setBranch(branch);
+        if (branch != null && branch.length() > 0 && !Objects.equals(account.getAccountNumber(), branch)) {
+            account.setAccountNumber(branch);
         }
 
         if (balance != null && balance > 0 && !Objects.equals(account.getBalance(), balance)) {

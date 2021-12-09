@@ -87,6 +87,9 @@ public class CustomerService {
         return customerRepository.findCustomerBySecondNameIgnoreCase(secondName);
     }
 
+    public Customer findById(Long id){
+        return customerRepository.getById(id);
+    }
     public Optional<Customer> findByNationalId(Integer nationalId) {
         return customerRepository.findCustomerByNationalId(nationalId);
     }

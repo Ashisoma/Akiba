@@ -32,6 +32,11 @@ public class CustomerController {
         return customerService.findByNationalId(nationalId);
     }
 
+    @GetMapping(path = "/{id}")
+    public Customer findById(@PathVariable(value = "id")Long id){
+        return customerService.findById(id);
+    }
+
     @GetMapping("/search/byFirstName/{firstName}")
     public List<Customer> findByFirstName(@PathVariable(value = "firstName") String firstName){
         return customerService.findCustomerByFirstName(firstName);

@@ -3,8 +3,6 @@ package com.ashisoma.akiba.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Table(name = "account")
 @Entity(name = "account")
@@ -19,7 +17,6 @@ public class Account {
             strategy = GenerationType.SEQUENCE,
             generator = "account_sequence"
     )
-
     @Id
     @Column(nullable = false, unique = true)
     private Long id;
@@ -28,7 +25,7 @@ public class Account {
     private Float balance;
 
     @Column(nullable = false)
-    private String branch;
+    private String accountNumber;
 
     @JsonIgnore
     @OneToOne
@@ -36,18 +33,27 @@ public class Account {
             referencedColumnName = "id")
     private Customer customer;
 
+    @OneToOne
+    @JoinColumn(name = "customer_branch_id",
+    referencedColumnName = "id")
+    private Branch customerBranch;
+
+    public Branch getCustomerBranch() {
+        return customerBranch;
+    }
+
     public Account() {
     }
 
     public Account(Long id, Float balance, String branch) {
         this.id = id;
         this.balance = balance;
-        this.branch = branch;
+        this.accountNumber = branch;
     }
 
     public Account(Float balance, String branch) {
         this.balance = balance;
-        this.branch = branch;
+        this.accountNumber = branch;
     }
 
     public Customer getCustomer() {
@@ -74,11 +80,11 @@ public class Account {
         this.balance = balance;
     }
 
-    public String getBranch() {
-        return branch;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setBranch(String branch) {
-        this.branch = branch;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 }

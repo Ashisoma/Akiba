@@ -24,13 +24,13 @@ public class Payments {
     private LocalDate payment_date;
 
     // TODO: 13/10/2021 to review this place again
-//    @ManyToOne
-//    @JoinTable(
-//            name = "customer_payments",
-//            joinColumns = @JoinColumn(name = "payment_id"),
-//            inverseJoinColumns = @JoinColumn(name = "customer_id")
-//    )
-//    private Customer customerPayment;
+    @ManyToOne
+    @JoinTable(
+            name = "customer_payments",
+            joinColumns = @JoinColumn(name = "payment_id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id")
+    )
+    private Customer customerPayment;
 
 //    @ManyToOne
 //    @JoinTable(

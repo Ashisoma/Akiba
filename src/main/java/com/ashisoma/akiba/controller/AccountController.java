@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@RestController(value = "api/v1/accounts")
+@RestController
+@RequestMapping(value = "api/v1/akiba/accounts")
 public class AccountController {
 
     @Autowired
@@ -24,12 +26,12 @@ public class AccountController {
     }
 
     @GetMapping(path = "/get/{id}")
-    public Account getById(@PathVariable(value = "id")Long id){
+    public Optional<Account> getById(@PathVariable(value = "id")Long id){
         return  service.getByID(id);
     }
     //post methods
     @PostMapping(path = "/post")
-    public void addNewAccount(Account account){
+    public void addNewAccount(@RequestBody Account account){
         service.addNewAccount(account);
     }
 

@@ -41,19 +41,24 @@ public class Customer {
     @Column(name = "street")
     private String street;
 
-//    @OneToOne
-//    @JoinColumn(name = "account_id",
-//                referencedColumnName = "id")
-//    private Account account;
-//
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "customerPayment",
-//               orphanRemoval = true,
-//               cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-//               fetch = FetchType.LAZY
-//                )
-//    private List<Payments> payments = new ArrayList<>();
-//
+    @OneToOne
+    @JoinColumn(name = "account_id",
+                referencedColumnName = "id")
+    private Account account;
+
+    @OneToOne
+    @JoinColumn(name = "borrower_loan_number",
+    referencedColumnName = "id")
+    private Loan borrower;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customerPayment",
+               orphanRemoval = true,
+               cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+               fetch = FetchType.LAZY
+                )
+    private List<Payments> payments = new ArrayList<>();
+
 
     public Customer() {
     }
@@ -87,9 +92,12 @@ public class Customer {
                 '}';
     }
 
-//    public List<Payments> getPayments() {
-//        return payments;
-//    }
+    public List<Payments> getPayments() {
+        return payments;
+    }
+public Loan getBorrower() {
+    return borrower;
+}
 
     public Integer getNationalId() {
         return nationalId;
@@ -139,11 +147,11 @@ public class Customer {
         this.id = id;
     }
 
-//    public Account getAccount() {
-//        return account;
-//    }
+    public Account getAccount() {
+        return account;
+    }
 
-//    public void setAccount(Account account) {
-//        this.account = account;
-//    }
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

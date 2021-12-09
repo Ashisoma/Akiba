@@ -16,10 +16,12 @@ public class Loan {
             strategy = GenerationType.SEQUENCE,
             generator = "loan_sequence"
     )
-
     @Id
     @Column(nullable = false, updatable = false, unique = true)
-    private Long loan_number;
+    private Long id;
+
+    @Column
+    private int loan_number;
 
     @Column
     private Float loan_balance;
@@ -31,27 +33,35 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(Long loan_number, Float loan_balance) {
+    public Loan(Long id, int loan_number, Float loan_balance) {
+        this.id = id;
         this.loan_number = loan_number;
         this.loan_balance = loan_balance;
-
     }
 
     @Override
     public String toString() {
         return "Loan{" +
-                "loan_number=" + loan_number +
+                "id=" + id +
+                ", loan_number=" + loan_number +
                 ", loan_balance=" + loan_balance +
-//                ", branch='" + branch + '\'' +
                 '}';
     }
 
-    public Long getLoan_number() {
+    public int getLoan_number() {
         return loan_number;
     }
 
-    public void setLoan_number(Long loan_number) {
+    public void setLoan_number(int loan_number) {
         this.loan_number = loan_number;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 
