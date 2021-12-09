@@ -1,64 +1,55 @@
 package com.ashisoma.akiba.controller;
 
-import com.ashisoma.akiba.entity.Account;
 import com.ashisoma.akiba.entity.Branch;
-import com.ashisoma.akiba.repository.AccountRepository;
-import com.ashisoma.akiba.repository.BranchRepository;
+import com.ashisoma.akiba.services.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(path = "ap1/v1/akiba/branch")
 public class BranchController {
 
     @Autowired
-    private final BranchRepository repository;
+    private final BranchService service;
 
-
-    public BranchController(BranchRepository repository) {
-        this.repository = repository;
+    public BranchController(BranchService service) {
+        this.service = service;
     }
 
-    // GETTING ALL BRANCH
+    // get methods
+    @GetMapping(path = "/get")
     public List<Branch> getAllBranches(){
-        return repository.findAll();
+        return  service.getAllBranches();
     }
 
-    // GETTING AN BRANCH BY ID
-    public Optional<Branch> getByID(Long id){
-        return  repository.findById(id);
+    @GetMapping(path = "/get/{b_name}")
+    public List<Branch> getBranchesByName(@PathVariable(value = "b_name") String b_name){
+        return  service.getByName(b_name);
     }
 
-    // ADD AN BRANCH
-    public  void addNewAccount(Branch branch){
-        Optional<Branch> branches = repository.findById(branch.getId());
-        if(branches.isPresent()) {
-            throw new IllegalStateException("The branch exists");
-        } else {
-            repository.save(branch);
-        }
+    @GetMapping(path = "/get/{id}")
+    public Optional<Branch> getById(@PathVariable(value = "id")Long id){
+        return  service.getByID(id);
+    }
+    //post methods
+    @PostMapping(path = "/post")
+    public void addNewBranch(@RequestBody Branch branch){
+        service.addNewBranch(branch);
     }
 
-    // UPDATE
-    @Transactional
-    public void updateBranch(Long id, String branch_name) {
-        Branch branch = repository.findById(id).orElseThrow(() ->
-                new IllegalStateException("Customer with id: " + id + " does not exist"));
-        if (branch_name != null && branch_name.length() > 0 && !Objects.equals(branch.getBranch_name(), branch_name)) {
-            branch.setBranch_name(branch_name);
-        }
+    // put methods
+    @PutMapping(path = "put/{id}")
+    public  void  updateBranch(@PathVariable(value = "id")Long id,
+                                  @RequestParam(required = false) String branch_name){
+        service.updateBranch(id, branch_name);
     }
-    //DELETE BY ID
-    public void  deleteBranchById(Long id){
-        boolean exists = repository.existsById(id);
-        if (!exists){
-            throw new IllegalStateException("Student id: " + id + "does not exist!");
-        }
-        else
-            repository.deleteById(id);
+
+    //delete method
+    @DeleteMapping(path = "delete/{id}")
+    public  void deleteAnAccountById(Long id){
+        service.deleteBranchById(id);
     }
 }
