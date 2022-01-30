@@ -24,9 +24,6 @@ public class Account {
     @Column(nullable = false)
     private Float balance;
 
-    @Column(nullable = false)
-    private String accountNumber;
-
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "customer_id",
@@ -45,15 +42,9 @@ public class Account {
     public Account() {
     }
 
-    public Account(Long id, Float balance, String branch) {
+    public Account(Long id, Float balance) {
         this.id = id;
         this.balance = balance;
-        this.accountNumber = branch;
-    }
-
-    public Account(Float balance, String branch) {
-        this.balance = balance;
-        this.accountNumber = branch;
     }
 
     public Customer getCustomer() {
@@ -80,11 +71,7 @@ public class Account {
         this.balance = balance;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+    public void registerAccount(Customer customer) {
+        this.customer = customer;
     }
 }

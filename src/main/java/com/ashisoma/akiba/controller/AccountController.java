@@ -26,7 +26,7 @@ public class AccountController {
     }
 
     @GetMapping(path = "/get/{id}")
-    public Optional<Account> getById(@PathVariable(value = "id")Long id){
+    public Optional<Account> getById(@PathVariable("id")Long id){
         return  service.getByID(id);
     }
     //post methods
@@ -47,5 +47,15 @@ public class AccountController {
     @DeleteMapping(path = "delete/{id}")
     public  void deleteAnAccountById(Long id){
         service.deleteAccountById(id);
+    }
+
+
+    @PutMapping(path = "/enrollAdmin/{accountId}/customer/{customerId}")
+    public Account assignAccountToCustomer(@PathVariable("accountId")Long accountId,
+                                  @PathVariable("customerId")Long customerId){
+        Account account = service.getByID(accountId).get();
+        service.assignAccountToCustomer(accountId,customerId);
+        return service.addNewAccount(account);
+
     }
 }

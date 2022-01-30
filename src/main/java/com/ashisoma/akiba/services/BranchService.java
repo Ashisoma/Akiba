@@ -32,7 +32,7 @@ public class BranchService {
     }
     //GET BRANCH BY  NAME
     public List <Branch> getByName(String branch_name){
-            return repository.findByBranch_name(branch_name);
+            return repository.findByBranch_nameIgnoreCase(branch_name);
     }
 
     // ADD AN BRANCH
@@ -49,10 +49,11 @@ public class BranchService {
     @Transactional
     public void updateBranch(Long id, String branch_name) {
         Branch branch = repository.findById(id).orElseThrow(() ->
-                new IllegalStateException("Customer with id: " + id + " does not exist"));
+                new IllegalStateException("Branch with id: " + id + " does not exist"));
         if (branch_name != null && branch_name.length() > 0 && !Objects.equals(branch.getBranch_name(), branch_name)) {
             branch.setBranch_name(branch_name);
         }
+        repository.save(branch);
     }
     //DELETE BY ID
     public void  deleteBranchById(Long id){

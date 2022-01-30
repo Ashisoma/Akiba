@@ -25,13 +25,13 @@ public class BranchController {
         return  service.getAllBranches();
     }
 
-    @GetMapping(path = "/get/{b_name}")
-    public List<Branch> getBranchesByName(@PathVariable(value = "b_name") String b_name){
+    @GetMapping(path = "/getByName/{b_name}")
+    public List<Branch> getBranchesByName(@PathVariable("b_name") String b_name){
         return  service.getByName(b_name);
     }
 
-    @GetMapping(path = "/get/{id}")
-    public Optional<Branch> getById(@PathVariable(value = "id")Long id){
+    @GetMapping(path = "/getById/{id}")
+    public Optional<Branch> getById(@PathVariable("id")Long id){
         return  service.getByID(id);
     }
     //post methods

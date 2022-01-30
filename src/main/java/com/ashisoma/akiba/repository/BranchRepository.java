@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface BranchRepository extends JpaRepository<Branch, Long> {
-    @Query("select b from Branch b where b.branch_name = ?1")
-    List<Branch> findByBranch_name(String branch_name);
+    @Query("select b from Branch b where upper(b.branch_name) = upper(?1)")
+    List<Branch> findByBranch_nameIgnoreCase(String branch_name);
+
+
+
 }
