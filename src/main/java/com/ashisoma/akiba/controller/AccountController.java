@@ -50,7 +50,7 @@ public class AccountController {
     }
 
 
-    @PutMapping(path = "/enrollAdmin/{accountId}/customer/{customerId}")
+    @PutMapping(path = "/enrollAccount/{accountId}/customer/{customerId}")
     public Account assignAccountToCustomer(@PathVariable("accountId")Long accountId,
                                   @PathVariable("customerId")Long customerId){
         Account account = service.getByID(accountId).get();

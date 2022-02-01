@@ -24,7 +24,7 @@ public class Account {
     @Column(nullable = false)
     private Float balance;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "customer_id",
             referencedColumnName = "id")
