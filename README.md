@@ -16,8 +16,8 @@ This spring boot application with Postgresql database. It is a rental management
 
 ## Dependencies used
 >>Psql drivers
->>Spring web
->>Spring boot JPA
+>>-Spring web
+>>-Spring boot JPA
 
 ## Application set-up 🏗️
 <!-- to be added -->
