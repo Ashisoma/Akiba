@@ -32,7 +32,19 @@ public class Payments {
     )
     private Customer customerPayment;
 
-//    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "loan_id")
+    private Loan loan;
+
+    public Loan getLoan() {
+        return loan;
+    }
+
+    public void setLoan(Loan loan) {
+        this.loan = loan;
+    }
+
+    //    @ManyToOne
 //    @JoinTable(
 //            name = "loan_payments",
 //            joinColumns = @JoinColumn(name = "payment_id"),

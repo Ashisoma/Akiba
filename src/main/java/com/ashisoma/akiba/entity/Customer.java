@@ -41,12 +41,12 @@ public class Customer {
     @Column(name = "street")
     private String street;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "account_id",
                 referencedColumnName = "id")
     private Account account;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "borrower_loan_number",
     referencedColumnName = "id")
     private Loan borrower;
@@ -95,9 +95,9 @@ public class Customer {
     public List<Payments> getPayments() {
         return payments;
     }
-public Loan getBorrower() {
-    return borrower;
-}
+    public Loan getBorrower() {
+        return borrower;
+    }
 
     public Integer getNationalId() {
         return nationalId;

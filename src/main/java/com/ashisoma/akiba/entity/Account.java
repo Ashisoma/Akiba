@@ -25,12 +25,12 @@ public class Account {
     private Float balance;
 
 //    @JsonIgnore
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "customer_id",
             referencedColumnName = "id")
     private Customer customer;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "customer_branch_id",
     referencedColumnName = "id")
     private Branch customerBranch;

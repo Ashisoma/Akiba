@@ -1,6 +1,8 @@
 package com.ashisoma.akiba.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "loan")
 @Entity
@@ -26,8 +28,19 @@ public class Loan {
     @Column
     private Float loan_balance;
 
-//    @ManyToOne(cascade = @JoinColumn(name = "branch_name"))
-//    private Branch branch;
+    @OneToMany(mappedBy = "loan", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Payments> paymentses = new ArrayList<>();
+
+    public List<Payments> getPaymentses() {
+        return paymentses;
+    }
+
+/*
+      @ManyToOne(cascade = @JoinColumn(name = "branch_name"))
+      private Branch branch;
+      this relationship can be gotten from the relationship between the customer and the account and the branch
+
+ */
 
 
     public Loan() {

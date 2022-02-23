@@ -48,7 +48,7 @@ public class AccountService {
     // UPDATE ACCOUNT
     // TODO: 21/11/2021  BRANCH TO BE EDITED BY THE ONE TO MANY RELATIONSHIP
     @Transactional
-    public void updateAccount(Long Id, String branch, Float balance) {
+    public void updateAccount(Long Id, Float balance) {
         Account account = repository.findById(Id).orElseThrow(() ->
                 new IllegalStateException("Customer with id: " + Id + " does not exist"));
 //        if (branch != null && branch.length() > 0 && !Objects.equals(account.getAccountNumber(), branch)) {

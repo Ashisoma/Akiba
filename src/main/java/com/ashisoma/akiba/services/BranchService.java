@@ -59,7 +59,7 @@ public class BranchService {
     public void  deleteBranchById(Long id){
         boolean exists = repository.existsById(id);
         if (!exists){
-            throw new IllegalStateException("Student id: " + id + "does not exist!");
+            throw new IllegalStateException("Branch with id: " + id + "does not exist!");
         }
         else
             repository.deleteById(id);

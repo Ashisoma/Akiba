@@ -38,9 +38,8 @@ public class AccountController {
     // put methods
     @PutMapping(path = "put/{id}")
     public  void  updateAnAccount(@PathVariable(value = "id")Long id,
-                                  @RequestParam(required = false) String branch,
                                   @RequestParam (required = false)Float balance){
-        service.updateAccount(id, branch, balance);
+        service.updateAccount(id, balance);
     }
 
     //delete method

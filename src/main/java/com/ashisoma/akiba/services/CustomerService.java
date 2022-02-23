@@ -40,14 +40,14 @@ public class CustomerService {
     }
 
     //delete a customer
-    public void deleteStudent(Long studentId) {
+    public void deleteStudent(Long customerId) {
 //        todo impliment cascading when a user is deleted
         // use custom query to do a cascading
-        boolean exists = customerRepository.existsById(studentId);
+        boolean exists = customerRepository.existsById(customerId);
         if (!exists){
-            throw new IllegalStateException("Student id: " + studentId + "does not exist!");
+            throw new IllegalStateException("Customer id: " + customerId + "does not exist!");
         }
-        customerRepository.deleteById(studentId);
+        customerRepository.deleteById(customerId);
     }
 
     // todo finish on doing an update
@@ -59,12 +59,6 @@ public class CustomerService {
         {
             customer.setFirstName(f_name);
         }
-//
-//        if (accountNumber != null && accountNumber>0 && !Objects.equals(customer.getAccount_number(),accountNumber))
-//        {
-//            customer.setAccount_number(accountNumber);
-//        }
-
         if (s_name != null && s_name.length()>0 && !Objects.equals(customer.getSecondName(),s_name))
         {
             customer.setSecondName(s_name);

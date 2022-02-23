@@ -16,7 +16,7 @@ public class Branch {
     @Column(name = "branch_name", nullable = false)
     private String branch_name;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
     @JoinColumn(name = "customer_account_id",
     referencedColumnName = "id")
